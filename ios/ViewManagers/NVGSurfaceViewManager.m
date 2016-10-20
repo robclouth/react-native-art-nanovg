@@ -17,9 +17,12 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
+
   NVGSurfaceView * v;
   v = [[NVGSurfaceView alloc] initWithBridge:self.bridge];
   return v;
 }
+
+RCT_EXPORT_VIEW_PROPERTY(dontSmooth, BOOL)
 
 @end

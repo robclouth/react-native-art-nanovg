@@ -133,7 +133,7 @@ class Surface extends React.Component {
     var w = extractNumber(props.width, 0);
     var h = extractNumber(props.height, 0);
     return (
-      <NativeSurfaceView style={[props.style, { width: w, height: h }]}>
+      <NativeSurfaceView dontSmooth={props.dontSmooth} style={[props.style, { width: w, height: h }]}>
         {this.props.children}
       </NativeSurfaceView>
     );

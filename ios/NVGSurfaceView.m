@@ -38,14 +38,23 @@
     self.opaque = FALSE;
     
     [EAGLContext setCurrentContext:self.context];
-    
-    vg = nvgCreateGLES2(0);
-    assert(vg);
-  
-}
+  }
   return self;
 }
 
+-(void)dealloc {
+  if(vg)
+    nvgDeleteGLES2(vg);
+}
+
+- (void)setDontSmooth:(BOOL)dontSmooth
+{
+  [self invalidate];
+  _dontSmooth = dontSmooth;
+  
+  if(vg)
+    nvgDeleteGLES2(vg);
+}
 
 - (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex
 {
@@ -72,6 +81,12 @@
 
 - (void)drawRect:(CGRect)rect
 {
+  if(!vg){
+    vg = nvgCreateGLES2(self.dontSmooth? 0 : NVG_ANTIALIAS);
+    
+    assert(vg);
+  }
+
   glClearColor(0, 0, 0, 0);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
   glEnable(GL_BLEND);

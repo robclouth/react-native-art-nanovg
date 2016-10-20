@@ -14,6 +14,8 @@
 
 @interface NVGSurfaceView : GLKView <NVGContainer>
 
+@property (nonatomic, assign) BOOL dontSmooth;
+
 - (instancetype)initWithBridge:(RCTBridge *)bridge;
 
 @end
