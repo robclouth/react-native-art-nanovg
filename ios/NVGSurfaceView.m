@@ -88,7 +88,7 @@
     [node renderTo:vg];
   }
   
-nvgEndFrame(vg);
+  nvgEndFrame(vg);
 
 }
 

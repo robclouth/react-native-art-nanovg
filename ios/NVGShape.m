@@ -25,7 +25,7 @@
 {
 }
 
-- (void)renderTo:(NVGcontext*)context
+- (void)renderLayerTo:(NVGcontext*)context
 {
   if ((!self.fill && !self.stroke) || !self.d) {
     return;
@@ -37,9 +37,6 @@ NSUInteger count = [self.d count];
 
 #define NEXT_VALUE [self.d[i++] floatValue]
 
-  CGMutablePathRef path = CGPathCreateMutable();
-  CGPathMoveToPoint(path, NULL, 0, 0);
-  
   NSUInteger i = 0;
     while (i < count) {
       NSUInteger type = [self.d[i++] unsignedIntegerValue];
@@ -65,7 +62,12 @@ NSUInteger count = [self.d count];
         case 6:
           nvgEllipse(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
           break;
-        
+        case 7:
+          nvgRect(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          break;
+        case 8:
+          nvgRoundedRectVarying(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          break;
       }
     }
   
@@ -82,40 +84,5 @@ NSUInteger count = [self.d count];
     [self.stroke applyStroke:context];      
   }
 }
-
-void CGPathEnumerationCallback(void *info, const CGPathElement *element)
-{
-    NVGcontext* context = info;
-    switch (element->type) {
-        case kCGPathElementMoveToPoint: {
-            CGPoint point = element ->points[0];
-            nvgMoveTo(context, point.x, point.y);
-            break;
-        }
-        case kCGPathElementAddLineToPoint: {
-            CGPoint point = element ->points[0];
-            nvgLineTo(context, point.x, point.y);
-            break;
-        }
-        case kCGPathElementAddQuadCurveToPoint: {
-            CGPoint point1 = element->points[0];
-            CGPoint point2 = element->points[1];
-            nvgQuadTo(context, point1.x, point1.y, point2.x, point2.y);
-            break;
-        }
-        case kCGPathElementAddCurveToPoint: {
-            CGPoint point1 = element->points[0];
-            CGPoint point2 = element->points[1];
-            CGPoint point3 = element->points[2];
-            nvgBezierTo(context, point1.x, point1.y, point2.x, point2.y, point3.x, point3.y);
-            break;
-        }
-        case kCGPathElementCloseSubpath: {
-            nvgClosePath(context);
-            break;
-        }
-    }
-}
-
 
 @end

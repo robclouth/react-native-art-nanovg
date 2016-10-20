@@ -22,5 +22,6 @@
 
 - (void)invalidate;
 - (void)renderTo:(NVGcontext*)context;
+- (void)renderLayerTo:(NVGcontext*)context;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation NVGGroup
 
-- (void)renderTo:(NVGcontext*)context
+- (void)renderLayerTo:(NVGcontext*)context
 {
   for (NVGNode *node in self.subviews) {
     [node renderTo:context];

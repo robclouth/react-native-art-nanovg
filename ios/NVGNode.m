@@ -51,7 +51,23 @@
 
 - (void)renderTo:(NVGcontext*)context;
 {
-  // abstract}
+  // apply transformations
+  nvgSave(context);
+  nvgTransform(context,
+    self.transform.a,
+    self.transform.b,
+    self.transform.c,
+    self.transform.d,
+    self.transform.tx,
+    self.transform.ty);
+  
+  [self renderLayerTo:context];
+  nvgRestore(context);
+}
+
+- (void)renderLayerTo:(CGContextRef)context
+{
+  // abstract
 }
 
 @end

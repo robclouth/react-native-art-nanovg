@@ -60,10 +60,4 @@
   }
 }
 
-- (void)renderTo:(NVGcontext*)context
-{
-  // abstract
-}
-
-
 @end
