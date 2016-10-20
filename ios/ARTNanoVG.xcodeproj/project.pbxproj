@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D44F605D1DB049E10088A277 /* NVGBrush.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60361DB049E10088A277 /* NVGBrush.m */; };
+		D44F605E1DB049E10088A277 /* NVGLinearGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60381DB049E10088A277 /* NVGLinearGradient.m */; };
+		D44F605F1DB049E10088A277 /* NVGPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F603A1DB049E10088A277 /* NVGPattern.m */; };
+		D44F60601DB049E10088A277 /* NVGRadialGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F603C1DB049E10088A277 /* NVGRadialGradient.m */; };
+		D44F60611DB049E10088A277 /* NVGSolidColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F603E1DB049E10088A277 /* NVGSolidColor.m */; };
+		D44F60621DB049E10088A277 /* NVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60421DB049E10088A277 /* NVGGroup.m */; };
+		D44F60631DB049E10088A277 /* NVGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60441DB049E10088A277 /* NVGNode.m */; };
+		D44F60641DB049E10088A277 /* NVGRenderable.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60461DB049E10088A277 /* NVGRenderable.m */; };
+		D44F60651DB049E10088A277 /* NVGShape.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60481DB049E10088A277 /* NVGShape.m */; };
+		D44F60661DB049E10088A277 /* NVGSurfaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F604A1DB049E10088A277 /* NVGSurfaceView.m */; };
+		D44F60671DB049E10088A277 /* NVGText.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F604C1DB049E10088A277 /* NVGText.m */; };
+		D44F60681DB049E10088A277 /* RCTConvert+NVG.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F604F1DB049E10088A277 /* RCTConvert+NVG.m */; };
+		D44F60691DB049E10088A277 /* NVGGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60521DB049E10088A277 /* NVGGroupManager.m */; };
+		D44F606A1DB049E10088A277 /* NVGNodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60541DB049E10088A277 /* NVGNodeManager.m */; };
+		D44F606B1DB049E10088A277 /* NVGRenderableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60561DB049E10088A277 /* NVGRenderableManager.m */; };
+		D44F606C1DB049E10088A277 /* NVGShapeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60581DB049E10088A277 /* NVGShapeManager.m */; };
+		D44F606D1DB049E10088A277 /* NVGSurfaceViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F605A1DB049E10088A277 /* NVGSurfaceViewManager.m */; };
+		D44F606E1DB049E10088A277 /* NVGTextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F605C1DB049E10088A277 /* NVGTextManager.m */; };
+		D44F607F1DB0500A0088A277 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = D44F607B1DB0500A0088A277 /* nanovg.c */; };
+		D44F60821DB050B30088A277 /* NVGContext.m in Sources */ = {isa = PBXBuildFile; fileRef = D44F60811DB050B30088A277 /* NVGContext.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0CF68ABF1AF0540F00FF9E5C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0CF68AC11AF0540F00FF9E5C /* libARTNanoVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libARTNanoVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D44F60351DB049E10088A277 /* NVGBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGBrush.h; sourceTree = "<group>"; };
+		D44F60361DB049E10088A277 /* NVGBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGBrush.m; sourceTree = "<group>"; };
+		D44F60371DB049E10088A277 /* NVGLinearGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGLinearGradient.h; sourceTree = "<group>"; };
+		D44F60381DB049E10088A277 /* NVGLinearGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGLinearGradient.m; sourceTree = "<group>"; };
+		D44F60391DB049E10088A277 /* NVGPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGPattern.h; sourceTree = "<group>"; };
+		D44F603A1DB049E10088A277 /* NVGPattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGPattern.m; sourceTree = "<group>"; };
+		D44F603B1DB049E10088A277 /* NVGRadialGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGRadialGradient.h; sourceTree = "<group>"; };
+		D44F603C1DB049E10088A277 /* NVGRadialGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGRadialGradient.m; sourceTree = "<group>"; };
+		D44F603D1DB049E10088A277 /* NVGSolidColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGSolidColor.h; sourceTree = "<group>"; };
+		D44F603E1DB049E10088A277 /* NVGSolidColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGSolidColor.m; sourceTree = "<group>"; };
+		D44F603F1DB049E10088A277 /* NVGCGFloatArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGCGFloatArray.h; sourceTree = "<group>"; };
+		D44F60401DB049E10088A277 /* NVGContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGContainer.h; sourceTree = "<group>"; };
+		D44F60411DB049E10088A277 /* NVGGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGGroup.h; sourceTree = "<group>"; };
+		D44F60421DB049E10088A277 /* NVGGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGGroup.m; sourceTree = "<group>"; };
+		D44F60431DB049E10088A277 /* NVGNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGNode.h; sourceTree = "<group>"; };
+		D44F60441DB049E10088A277 /* NVGNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGNode.m; sourceTree = "<group>"; };
+		D44F60451DB049E10088A277 /* NVGRenderable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGRenderable.h; sourceTree = "<group>"; };
+		D44F60461DB049E10088A277 /* NVGRenderable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGRenderable.m; sourceTree = "<group>"; };
+		D44F60471DB049E10088A277 /* NVGShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGShape.h; sourceTree = "<group>"; };
+		D44F60481DB049E10088A277 /* NVGShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGShape.m; sourceTree = "<group>"; };
+		D44F60491DB049E10088A277 /* NVGSurfaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGSurfaceView.h; sourceTree = "<group>"; };
+		D44F604A1DB049E10088A277 /* NVGSurfaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGSurfaceView.m; sourceTree = "<group>"; };
+		D44F604B1DB049E10088A277 /* NVGText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGText.h; sourceTree = "<group>"; };
+		D44F604C1DB049E10088A277 /* NVGText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGText.m; sourceTree = "<group>"; };
+		D44F604D1DB049E10088A277 /* NVGTextFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGTextFrame.h; sourceTree = "<group>"; };
+		D44F604E1DB049E10088A277 /* RCTConvert+NVG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+NVG.h"; sourceTree = "<group>"; };
+		D44F604F1DB049E10088A277 /* RCTConvert+NVG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+NVG.m"; sourceTree = "<group>"; };
+		D44F60511DB049E10088A277 /* NVGGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGGroupManager.h; sourceTree = "<group>"; };
+		D44F60521DB049E10088A277 /* NVGGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGGroupManager.m; sourceTree = "<group>"; };
+		D44F60531DB049E10088A277 /* NVGNodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGNodeManager.h; sourceTree = "<group>"; };
+		D44F60541DB049E10088A277 /* NVGNodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGNodeManager.m; sourceTree = "<group>"; };
+		D44F60551DB049E10088A277 /* NVGRenderableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGRenderableManager.h; sourceTree = "<group>"; };
+		D44F60561DB049E10088A277 /* NVGRenderableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGRenderableManager.m; sourceTree = "<group>"; };
+		D44F60571DB049E10088A277 /* NVGShapeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGShapeManager.h; sourceTree = "<group>"; };
+		D44F60581DB049E10088A277 /* NVGShapeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGShapeManager.m; sourceTree = "<group>"; };
+		D44F60591DB049E10088A277 /* NVGSurfaceViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGSurfaceViewManager.h; sourceTree = "<group>"; };
+		D44F605A1DB049E10088A277 /* NVGSurfaceViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGSurfaceViewManager.m; sourceTree = "<group>"; };
+		D44F605B1DB049E10088A277 /* NVGTextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGTextManager.h; sourceTree = "<group>"; };
+		D44F605C1DB049E10088A277 /* NVGTextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGTextManager.m; sourceTree = "<group>"; };
+		D44F60781DB0500A0088A277 /* fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fontstash.h; path = ../nanovg/src/fontstash.h; sourceTree = "<group>"; };
+		D44F60791DB0500A0088A277 /* nanovg_gl_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nanovg_gl_utils.h; path = ../nanovg/src/nanovg_gl_utils.h; sourceTree = "<group>"; };
+		D44F607A1DB0500A0088A277 /* nanovg_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nanovg_gl.h; path = ../nanovg/src/nanovg_gl.h; sourceTree = "<group>"; };
+		D44F607B1DB0500A0088A277 /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = nanovg.c; path = ../nanovg/src/nanovg.c; sourceTree = "<group>"; };
+		D44F607C1DB0500A0088A277 /* nanovg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nanovg.h; path = ../nanovg/src/nanovg.h; sourceTree = "<group>"; };
+		D44F607D1DB0500A0088A277 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stb_image.h; path = ../nanovg/src/stb_image.h; sourceTree = "<group>"; };
+		D44F607E1DB0500A0088A277 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stb_truetype.h; path = ../nanovg/src/stb_truetype.h; sourceTree = "<group>"; };
+		D44F60801DB050B30088A277 /* NVGContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVGContext.h; sourceTree = "<group>"; };
+		D44F60811DB050B30088A277 /* NVGContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVGContext.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0CF68ABE1AF0540F00FF9E5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CF68AB81AF0540F00FF9E5C = {
+			isa = PBXGroup;
+			children = (
+				D44F60771DB04FF40088A277 /* nanovg */,
+				D44F60341DB049E10088A277 /* Brushes */,
+				D44F603F1DB049E10088A277 /* NVGCGFloatArray.h */,
+				D44F60401DB049E10088A277 /* NVGContainer.h */,
+				D44F60411DB049E10088A277 /* NVGGroup.h */,
+				D44F60421DB049E10088A277 /* NVGGroup.m */,
+				D44F60431DB049E10088A277 /* NVGNode.h */,
+				D44F60441DB049E10088A277 /* NVGNode.m */,
+				D44F60451DB049E10088A277 /* NVGRenderable.h */,
+				D44F60461DB049E10088A277 /* NVGRenderable.m */,
+				D44F60471DB049E10088A277 /* NVGShape.h */,
+				D44F60481DB049E10088A277 /* NVGShape.m */,
+				D44F60491DB049E10088A277 /* NVGSurfaceView.h */,
+				D44F604A1DB049E10088A277 /* NVGSurfaceView.m */,
+				D44F604B1DB049E10088A277 /* NVGText.h */,
+				D44F604C1DB049E10088A277 /* NVGText.m */,
+				D44F604D1DB049E10088A277 /* NVGTextFrame.h */,
+				D44F604E1DB049E10088A277 /* RCTConvert+NVG.h */,
+				D44F604F1DB049E10088A277 /* RCTConvert+NVG.m */,
+				D44F60801DB050B30088A277 /* NVGContext.h */,
+				D44F60811DB050B30088A277 /* NVGContext.m */,
+				D44F60501DB049E10088A277 /* ViewManagers */,
+				0CF68AC21AF0540F00FF9E5C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0CF68AC21AF0540F00FF9E5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0CF68AC11AF0540F00FF9E5C /* libARTNanoVG.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D44F60341DB049E10088A277 /* Brushes */ = {
+			isa = PBXGroup;
+			children = (
+				D44F60351DB049E10088A277 /* NVGBrush.h */,
+				D44F60361DB049E10088A277 /* NVGBrush.m */,
+				D44F60371DB049E10088A277 /* NVGLinearGradient.h */,
+				D44F60381DB049E10088A277 /* NVGLinearGradient.m */,
+				D44F60391DB049E10088A277 /* NVGPattern.h */,
+				D44F603A1DB049E10088A277 /* NVGPattern.m */,
+				D44F603B1DB049E10088A277 /* NVGRadialGradient.h */,
+				D44F603C1DB049E10088A277 /* NVGRadialGradient.m */,
+				D44F603D1DB049E10088A277 /* NVGSolidColor.h */,
+				D44F603E1DB049E10088A277 /* NVGSolidColor.m */,
+			);
+			path = Brushes;
+			sourceTree = "<group>";
+		};
+		D44F60501DB049E10088A277 /* ViewManagers */ = {
+			isa = PBXGroup;
+			children = (
+				D44F60511DB049E10088A277 /* NVGGroupManager.h */,
+				D44F60521DB049E10088A277 /* NVGGroupManager.m */,
+				D44F60531DB049E10088A277 /* NVGNodeManager.h */,
+				D44F60541DB049E10088A277 /* NVGNodeManager.m */,
+				D44F60551DB049E10088A277 /* NVGRenderableManager.h */,
+				D44F60561DB049E10088A277 /* NVGRenderableManager.m */,
+				D44F60571DB049E10088A277 /* NVGShapeManager.h */,
+				D44F60581DB049E10088A277 /* NVGShapeManager.m */,
+				D44F60591DB049E10088A277 /* NVGSurfaceViewManager.h */,
+				D44F605A1DB049E10088A277 /* NVGSurfaceViewManager.m */,
+				D44F605B1DB049E10088A277 /* NVGTextManager.h */,
+				D44F605C1DB049E10088A277 /* NVGTextManager.m */,
+			);
+			path = ViewManagers;
+			sourceTree = "<group>";
+		};
+		D44F60771DB04FF40088A277 /* nanovg */ = {
+			isa = PBXGroup;
+			children = (
+				D44F60781DB0500A0088A277 /* fontstash.h */,
+				D44F60791DB0500A0088A277 /* nanovg_gl_utils.h */,
+				D44F607A1DB0500A0088A277 /* nanovg_gl.h */,
+				D44F607B1DB0500A0088A277 /* nanovg.c */,
+				D44F607C1DB0500A0088A277 /* nanovg.h */,
+				D44F607D1DB0500A0088A277 /* stb_image.h */,
+				D44F607E1DB0500A0088A277 /* stb_truetype.h */,
+			);
+			name = nanovg;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CF68AC01AF0540F00FF9E5C /* ARTNanoVG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CF68AD51AF0540F00FF9E5C /* Build configuration list for PBXNativeTarget "ARTNanoVG" */;
+			buildPhases = (
+				0CF68ABD1AF0540F00FF9E5C /* Sources */,
+				0CF68ABE1AF0540F00FF9E5C /* Frameworks */,
+				0CF68ABF1AF0540F00FF9E5C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ARTNanoVG;
+			productName = ART;
+			productReference = 0CF68AC11AF0540F00FF9E5C /* libARTNanoVG.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0CF68AB91AF0540F00FF9E5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				TargetAttributes = {
+					0CF68AC01AF0540F00FF9E5C = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 0CF68ABC1AF0540F00FF9E5C /* Build configuration list for PBXProject "ARTNanoVG" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0CF68AB81AF0540F00FF9E5C;
+			productRefGroup = 0CF68AC21AF0540F00FF9E5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0CF68AC01AF0540F00FF9E5C /* ARTNanoVG */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0CF68ABD1AF0540F00FF9E5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D44F606D1DB049E10088A277 /* NVGSurfaceViewManager.m in Sources */,
+				D44F60661DB049E10088A277 /* NVGSurfaceView.m in Sources */,
+				D44F60601DB049E10088A277 /* NVGRadialGradient.m in Sources */,
+				D44F60641DB049E10088A277 /* NVGRenderable.m in Sources */,
+				D44F606C1DB049E10088A277 /* NVGShapeManager.m in Sources */,
+				D44F606B1DB049E10088A277 /* NVGRenderableManager.m in Sources */,
+				D44F60681DB049E10088A277 /* RCTConvert+NVG.m in Sources */,
+				D44F60611DB049E10088A277 /* NVGSolidColor.m in Sources */,
+				D44F60651DB049E10088A277 /* NVGShape.m in Sources */,
+				D44F60691DB049E10088A277 /* NVGGroupManager.m in Sources */,
+				D44F605E1DB049E10088A277 /* NVGLinearGradient.m in Sources */,
+				D44F60821DB050B30088A277 /* NVGContext.m in Sources */,
+				D44F605F1DB049E10088A277 /* NVGPattern.m in Sources */,
+				D44F606A1DB049E10088A277 /* NVGNodeManager.m in Sources */,
+				D44F60631DB049E10088A277 /* NVGNode.m in Sources */,
+				D44F607F1DB0500A0088A277 /* nanovg.c in Sources */,
+				D44F606E1DB049E10088A277 /* NVGTextManager.m in Sources */,
+				D44F605D1DB049E10088A277 /* NVGBrush.m in Sources */,
+				D44F60671DB049E10088A277 /* NVGText.m in Sources */,
+				D44F60621DB049E10088A277 /* NVGGroup.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0CF68AD31AF0540F00FF9E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../React/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0CF68AD41AF0540F00FF9E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../React/**",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0CF68AD61AF0540F00FF9E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0CF68AD71AF0540F00FF9E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0CF68ABC1AF0540F00FF9E5C /* Build configuration list for PBXProject "ARTNanoVG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CF68AD31AF0540F00FF9E5C /* Debug */,
+				0CF68AD41AF0540F00FF9E5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0CF68AD51AF0540F00FF9E5C /* Build configuration list for PBXNativeTarget "ARTNanoVG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CF68AD61AF0540F00FF9E5C /* Debug */,
+				0CF68AD71AF0540F00FF9E5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0CF68AB91AF0540F00FF9E5C /* Project object */;
+}

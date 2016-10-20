@@ -1,0 +1,35 @@
+{
+    "version": "0.0.1",
+    "name": "react-native-art-nanovg",
+    "description": "A NanoVG backend for ART",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/robclouth/react-native-art-nanovg"
+    },
+    "license": "MIT",
+    "main": "./index.js",
+    "keywords": [
+        "react-native",
+        "ios",
+        "android",
+        "art",
+        "nanovg",
+        "gradient"
+    ],
+    "scripts": {
+        "lint": "eslint ./"
+    },
+    "peerDependencies": {
+        "react-native": ">=0.33.0"
+    },
+    "dependencies": {
+        "color": "^0.11.1",
+        "lodash": "^4.0.0"
+    },
+    "devDependencies": {
+        "babel-eslint": "^6.1.2",
+        "eslint": "^2.13.1",
+        "eslint-plugin-react": "^4.3.0"
+    },
+    "nativePackage": true
+}
