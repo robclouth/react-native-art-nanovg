@@ -35,38 +35,52 @@
 
 NSUInteger count = [self.d count];
 
-#define NEXT_VALUE [self.d[i++] floatValue]
+#define NEXT_FLOAT [self.d[i++] floatValue]
+#define NEXT_BOOL [self.d[i++] boolValue]
 
   NSUInteger i = 0;
     while (i < count) {
       NSUInteger type = [self.d[i++] unsignedIntegerValue];
       switch (type) {
         case 0:
-        nvgMoveTo(context, NEXT_VALUE, NEXT_VALUE);
+        nvgMoveTo(context, NEXT_FLOAT, NEXT_FLOAT);
           break;
         case 1:
           nvgClosePath(context);
+          if(NEXT_BOOL)
+            nvgPathWinding(context, NVG_HOLE);
           break;
         case 2:
-          nvgLineTo(context, NEXT_VALUE, NEXT_VALUE);
+          nvgLineTo(context, NEXT_FLOAT, NEXT_FLOAT);
           break;
         case 3:
-          nvgBezierTo(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          nvgBezierTo(context, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT);
           break;
         case 4:
-          nvgArc(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          nvgArc(context, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT);
           break;
         case 5:
-          nvgCircle(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          nvgCircle(context, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT);
+          if(NEXT_BOOL)
+            nvgPathWinding(context, NVG_HOLE);
           break;
         case 6:
-          nvgEllipse(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          nvgEllipse(context, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT);
+          if(NEXT_BOOL)
+            nvgPathWinding(context, NVG_HOLE);
           break;
         case 7:
-          nvgRect(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          nvgRect(context, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT);
+          if(NEXT_BOOL)
+            nvgPathWinding(context, NVG_HOLE);
           break;
         case 8:
-          nvgRoundedRectVarying(context, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE, NEXT_VALUE);
+          nvgRoundedRectVarying(context, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT, NEXT_FLOAT);
+          if(NEXT_BOOL)
+            nvgPathWinding(context, NVG_HOLE);
+          break;
+        case 9:
+          nvgPathWinding(context, NVG_HOLE);
           break;
       }
     }
