@@ -23,6 +23,4 @@ RCT_EXPORT_MODULE()
   return v;
 }
 
-RCT_EXPORT_VIEW_PROPERTY(dontSmooth, BOOL)
-
 @end

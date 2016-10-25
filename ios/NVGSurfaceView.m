@@ -13,11 +13,6 @@
 #import "NVGNode.h"
 #import "RCTLog.h"
 
-#import "nanovg.h"
-#define NANOVG_GLES2_IMPLEMENTATION
-#import "nanovg_gl.h"
-#import "nanovg_gl_utils.h"
-
 @implementation NVGSurfaceView
 {
     RCTBridge *_bridge;
@@ -30,30 +25,15 @@
   if ((self = [super init])) {
     _bridge = bridge;
     self.context = [bridge.nvgContext getContext];
-    
     self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     self.drawableStencilFormat = GLKViewDrawableStencilFormat8;
     self.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
     
     self.opaque = FALSE;
     
-    [EAGLContext setCurrentContext:self.context];
+    vg = [bridge.nvgContext getNVGContext];
   }
   return self;
-}
-
--(void)dealloc {
-  if(vg)
-    nvgDeleteGLES2(vg);
-}
-
-- (void)setDontSmooth:(BOOL)dontSmooth
-{
-  [self invalidate];
-  _dontSmooth = dontSmooth;
-  
-  if(vg)
-    nvgDeleteGLES2(vg);
 }
 
 - (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex
@@ -81,11 +61,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-  if(!vg){
-    vg = nvgCreateGLES2(self.dontSmooth? 0 : NVG_ANTIALIAS);
-    
-    assert(vg);
-  }
+  assert(vg);
 
   glClearColor(0, 0, 0, 0);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
@@ -104,7 +80,6 @@
   }
   
   nvgEndFrame(vg);
-
 }
 
 - (void)reactSetInheritedBackgroundColor:(UIColor *)inheritedBackgroundColor
