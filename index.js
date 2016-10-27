@@ -1,8 +1,8 @@
 'use strict';
 
-import Color from 'react-native/art/core/color';
+import Color from 'art/core/color';
 import Path from './lib/SerializablePath';
-import Transform from 'react-native/art/core/transform';
+import Transform from 'art/core/transform';
 
 import React from 'react';
 
