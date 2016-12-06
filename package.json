@@ -1,35 +1,98 @@
 {
-    "version": "0.0.1",
+  "_args": [
+    [
+      {
+        "raw": "react-native-art-nanovg@git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+        "scope": null,
+        "escapedName": "react-native-art-nanovg",
+        "name": "react-native-art-nanovg",
+        "rawSpec": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+        "spec": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:robclouth/react-native-art-nanovg.git#b86e5d9",
+          "sshUrl": "git+ssh://git@github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+          "httpsUrl": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+          "gitUrl": "git://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+          "shortcut": "github:robclouth/react-native-art-nanovg#b86e5d9",
+          "directUrl": "https://raw.githubusercontent.com/robclouth/react-native-art-nanovg/b86e5d9/package.json"
+        }
+      },
+      "/Users/Rob/Documents/Projects/Oval/App"
+    ]
+  ],
+  "_from": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+  "_id": "react-native-art-nanovg@0.0.1",
+  "_inCache": true,
+  "_location": "/react-native-art-nanovg",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-art-nanovg@git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+    "scope": null,
+    "escapedName": "react-native-art-nanovg",
     "name": "react-native-art-nanovg",
-    "description": "A NanoVG backend for ART",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/robclouth/react-native-art-nanovg"
-    },
-    "license": "MIT",
-    "main": "./index.js",
-    "keywords": [
-        "react-native",
-        "ios",
-        "android",
-        "art",
-        "nanovg",
-        "gradient"
-    ],
-    "scripts": {
-        "lint": "eslint ./"
-    },
-    "peerDependencies": {
-        "react-native": ">=0.33.0"
-    },
-    "dependencies": {
-        "color": "^0.11.1",
-        "lodash": "^4.0.0"
-    },
-    "devDependencies": {
-        "babel-eslint": "^6.1.2",
-        "eslint": "^2.13.1",
-        "eslint-plugin-react": "^4.3.0"
-    },
-    "nativePackage": true
+    "rawSpec": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+    "spec": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:robclouth/react-native-art-nanovg.git#b86e5d9",
+      "sshUrl": "git+ssh://git@github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+      "httpsUrl": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+      "gitUrl": "git://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+      "shortcut": "github:robclouth/react-native-art-nanovg#b86e5d9",
+      "directUrl": "https://raw.githubusercontent.com/robclouth/react-native-art-nanovg/b86e5d9/package.json"
+    }
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d92e097ae2a2af1168e29a5b6e4f7217ee6",
+  "_shasum": "fa9454b5d69bfaf347f9ea1671ed312994bd5f51",
+  "_shrinkwrap": null,
+  "_spec": "react-native-art-nanovg@git+https://github.com/robclouth/react-native-art-nanovg.git#b86e5d9",
+  "_where": "/Users/Rob/Documents/Projects/Oval/App",
+  "bugs": {
+    "url": "https://github.com/robclouth/react-native-art-nanovg/issues"
+  },
+  "dependencies": {
+    "art": "^0.10.0",
+    "color": "^0.11.1",
+    "lodash": "^4.0.0"
+  },
+  "description": "A NanoVG backend for ART",
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^2.13.1",
+    "eslint-plugin-react": "^4.3.0"
+  },
+  "gitHead": "b86e5d92e097ae2a2af1168e29a5b6e4f7217ee6",
+  "homepage": "https://github.com/robclouth/react-native-art-nanovg#readme",
+  "keywords": [
+    "react-native",
+    "ios",
+    "android",
+    "art",
+    "nanovg",
+    "gradient"
+  ],
+  "license": "MIT",
+  "main": "./index.js",
+  "name": "react-native-art-nanovg",
+  "nativePackage": true,
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "react-native": ">=0.33.0"
+  },
+  "readme": "## react-native-art-nanovg\n\n`react-native-art-nanovg` is a replacement for ReactNativeART that uses the OpenGL vector drawing library NanoVG as a back-end, and replaces some of the weirder ART programming choices (like that horrible way of drawing arcs).\n\n\n### TODO:\n1. Fix radial gradients.\n2. Android version.\n3. Respect the border radius of the Surface.\n\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robclouth/react-native-art-nanovg.git"
+  },
+  "scripts": {
+    "lint": "eslint ./"
+  },
+  "version": "0.0.1"
 }
