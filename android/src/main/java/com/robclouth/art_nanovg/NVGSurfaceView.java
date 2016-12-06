@@ -130,18 +130,20 @@ public class NVGSurfaceView extends TextureView {
                     }
                 }
 
-                // Still alive, render a frame.
                 GLES20.glClearColor(1, 0, 0, 1.0f);
                 GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_STENCIL_BUFFER_BIT);
 
-//                nanovg.nvgBeginFrame(vg, width, height, 1);
-//                nanovg.nvgBeginPath(vg);
-//                nanovg.nvgMoveTo(vg, 10, 10);
-//                nanovg.nvgLineTo(vg, 20, 20);
-//                nanovg.nvgClosePath(vg);
-//                nanovg.nvgFillColor(vg, nanovg.nvgRGBAf(1,0,0,1));
-//                nanovg.nvgFill(vg);
-//                nanovg.nvgEndFrame(vg);
+                nanovg.nvgBeginFrame(vg, width, height, 1);
+                nanovg.nvgBeginPath(vg);
+                nanovg.nvgMoveTo(vg, 10, 10);
+                nanovg.nvgLineTo(vg, 20, 20);
+                nanovg.nvgLineTo(vg, 10, 20);
+                nanovg.nvgClosePath(vg);
+                nanovg.nvgFillColor(vg, nanovg.nvgRGBAf(1,1,0,1));
+                nanovg.nvgFill(vg);
+                nanovg.nvgEndFrame(vg);
+
+                eglSurface.swapBuffers();
             }
         }
 
