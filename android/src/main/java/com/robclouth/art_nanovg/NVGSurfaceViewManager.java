@@ -25,13 +25,7 @@ public class NVGSurfaceViewManager extends
 
     private static final CSSNodeAPI.MeasureFunction MEASURE_FUNCTION = new CSSNodeAPI.MeasureFunction() {
         @Override
-        public void measure(
-                CSSNodeAPI node,
-                float width,
-                CSSMeasureMode widthMode,
-                float height,
-                CSSMeasureMode heightMode,
-                MeasureOutput measureOutput) {
+        public long measure(CSSNodeAPI node, float width, CSSMeasureMode widthMode, float height, CSSMeasureMode heightMode) {
             throw new IllegalStateException("SurfaceView should have explicit width and height set");
         }
     };
