@@ -20,6 +20,8 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.DisplayMetricsHolder;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.ReactShadowNode;
+import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
+import com.robclouth.art_nanovg.nanovg.nanovg;
 
 /**
  * Base class for NVGView virtual nodes: {@link NVGGroupShadowNode}, {@link NVGShapeShadowNode} and
@@ -30,12 +32,8 @@ public abstract class NVGVirtualNode extends ReactShadowNode {
     protected static final float MIN_OPACITY_FOR_DRAW = 0.01f;
 
     private static final float[] sMatrixData = new float[9];
-    private static final float[] sRawMatrix = new float[9];
 
     protected float mOpacity = 1f;
-    private
-    @Nullable
-    Matrix mMatrix = new Matrix();
 
     protected final float mScale;
 
@@ -48,32 +46,21 @@ public abstract class NVGVirtualNode extends ReactShadowNode {
         return true;
     }
 
-    public abstract void draw(Canvas canvas, Paint paint, float opacity);
+    public abstract void draw(SWIGTYPE_p_NVGcontext vg, float opacity);
 
-    /**
-     * Sets up the transform matrix on the canvas before an element is drawn.
-     *
-     * NB: for perf reasons this does not apply opacity, as that would mean creating a new canvas
-     * layer (which allocates an offscreen bitmap) and having it composited afterwards. Instead, the
-     * drawing code should apply opacity recursively.
-     *
-     * @param canvas the canvas to set up
-     */
-    protected final void saveAndSetupCanvas(Canvas canvas) {
-        canvas.save();
-        if (mMatrix != null) {
-            canvas.concat(mMatrix);
-        }
+    protected final void saveAndSetupNVGContext(SWIGTYPE_p_NVGcontext vg) {
+        nanovg.nvgSave(vg);
+        nanovg.nvgTransform(vg,
+                sMatrixData[0],
+                sMatrixData[1],
+                sMatrixData[2],
+                sMatrixData[3],
+                sMatrixData[4],
+                sMatrixData[5]);
     }
 
-    /**
-     * Restore the canvas after an element was drawn. This is always called in mirror with
-     * {@link #saveAndSetupCanvas}.
-     *
-     * @param canvas the canvas to restore
-     */
-    protected void restoreCanvas(Canvas canvas) {
-        canvas.restore();
+    protected void restoreNVGContext(SWIGTYPE_p_NVGcontext vg) {
+        nanovg.nvgRestore(vg);
     }
 
     @ReactProp(name = "opacity", defaultFloat = 1f)
@@ -86,30 +73,12 @@ public abstract class NVGVirtualNode extends ReactShadowNode {
     public void setTransform(@Nullable ReadableArray transformArray) {
         if (transformArray != null) {
             int matrixSize = PropHelper.toFloatArray(transformArray, sMatrixData);
-            if (matrixSize == 6) {
-                setupMatrix();
-            } else if (matrixSize != -1) {
+            if (matrixSize != 6 && matrixSize != -1) {
                 throw new JSApplicationIllegalArgumentException("Transform matrices must be of size 6");
             }
-        } else {
-            mMatrix = null;
         }
+
         markUpdated();
     }
 
-    protected void setupMatrix() {
-        sRawMatrix[0] = sMatrixData[0];
-        sRawMatrix[1] = sMatrixData[2];
-        sRawMatrix[2] = sMatrixData[4] * mScale;
-        sRawMatrix[3] = sMatrixData[1];
-        sRawMatrix[4] = sMatrixData[3];
-        sRawMatrix[5] = sMatrixData[5] * mScale;
-        sRawMatrix[6] = 0;
-        sRawMatrix[7] = 0;
-        sRawMatrix[8] = 1;
-        if (mMatrix == null) {
-            mMatrix = new Matrix();
-        }
-        mMatrix.setValues(sRawMatrix);
-    }
 }

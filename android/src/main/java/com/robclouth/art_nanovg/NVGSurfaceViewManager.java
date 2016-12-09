@@ -54,6 +54,6 @@ public class NVGSurfaceViewManager extends
 
     @Override
     public void updateExtraData(NVGSurfaceView root, Object extraData) {
-//        root.setBitmap((Bitmap) extraData);
+        root.setSurfaceTextureListener((NVGSurfaceViewShadowNode) extraData);
     }
 }

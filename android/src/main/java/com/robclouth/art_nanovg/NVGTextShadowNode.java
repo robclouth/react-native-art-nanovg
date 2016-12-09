@@ -19,6 +19,7 @@ import android.text.TextUtils;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
 
 /**
  * Shadow node for virtual NVGText view
@@ -55,46 +56,46 @@ public class NVGTextShadowNode extends NVGShapeShadowNode {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint, float opacity) {
+    public void draw(SWIGTYPE_p_NVGcontext vg, float opacity) {
         if (mFrame == null) {
             return;
         }
-        opacity *= mOpacity;
-        if (opacity <= MIN_OPACITY_FOR_DRAW) {
-            return;
-        }
-        if (!mFrame.hasKey(PROP_LINES)) {
-            return;
-        }
-        ReadableArray linesProp = mFrame.getArray(PROP_LINES);
-        if (linesProp == null || linesProp.size() == 0) {
-            return;
-        }
-
-        // only set up the canvas if we have something to draw
-        saveAndSetupCanvas(canvas);
-        String[] lines = new String[linesProp.size()];
-        for (int i = 0; i < lines.length; i++) {
-            lines[i] = linesProp.getString(i);
-        }
-        String text = TextUtils.join("\n", lines);
-        if (setupStrokePaint(paint, opacity)) {
-            applyTextPropertiesToPaint(paint);
-            if (mPath == null) {
-                canvas.drawText(text, 0, -paint.ascent(), paint);
-            } else {
-                canvas.drawTextOnPath(text, mPath, 0, 0, paint);
-            }
-        }
-        if (setupFillPaint(paint, opacity)) {
-            applyTextPropertiesToPaint(paint);
-            if (mPath == null) {
-                canvas.drawText(text, 0, -paint.ascent(), paint);
-            } else {
-                canvas.drawTextOnPath(text, mPath, 0, 0, paint);
-            }
-        }
-        restoreCanvas(canvas);
+//        opacity *= mOpacity;
+//        if (opacity <= MIN_OPACITY_FOR_DRAW) {
+//            return;
+//        }
+//        if (!mFrame.hasKey(PROP_LINES)) {
+//            return;
+//        }
+//        ReadableArray linesProp = mFrame.getArray(PROP_LINES);
+//        if (linesProp == null || linesProp.size() == 0) {
+//            return;
+//        }
+//
+//        // only set up the canvas if we have something to draw
+//        saveAndSetupCanvas(canvas);
+//        String[] lines = new String[linesProp.size()];
+//        for (int i = 0; i < lines.length; i++) {
+//            lines[i] = linesProp.getString(i);
+//        }
+//        String text = TextUtils.join("\n", lines);
+//        if (setupStrokePaint(paint, opacity)) {
+//            applyTextPropertiesToPaint(paint);
+//            if (mPath == null) {
+//                canvas.drawText(text, 0, -paint.ascent(), paint);
+//            } else {
+//                canvas.drawTextOnPath(text, mPath, 0, 0, paint);
+//            }
+//        }
+//        if (setupFillPaint(paint, opacity)) {
+//            applyTextPropertiesToPaint(paint);
+//            if (mPath == null) {
+//                canvas.drawText(text, 0, -paint.ascent(), paint);
+//            } else {
+//                canvas.drawTextOnPath(text, mPath, 0, 0, paint);
+//            }
+//        }
+//        restoreCanvas(canvas);
         markUpdateSeen();
     }
 

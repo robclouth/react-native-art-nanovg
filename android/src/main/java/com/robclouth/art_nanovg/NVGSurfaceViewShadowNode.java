@@ -1,28 +1,51 @@
 /**
- * Copyright (c) 2015-present, Rob Clouth.
+ * Copyright (c) 2015-present, Facebook, Inc.
  * All rights reserved.
- * <p>
- * This source code is licensed under the MIT-style license found in the
- * LICENSE file in the root directory of this source tree.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
  */
-
 
 package com.robclouth.art_nanovg;
 
-import android.graphics.Bitmap;
+import javax.annotation.Nullable;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Color;
+import android.opengl.GLES20;
+import android.view.Surface;
+import android.graphics.PorterDuff;
+import android.graphics.SurfaceTexture;
+import android.view.TextureView;
 
+import com.facebook.common.logging.FLog;
+import com.facebook.react.common.ReactConstants;
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.UIViewOperationQueue;
+import com.facebook.react.uimanager.ReactShadowNode;
+import com.robclouth.art_nanovg.gles.WindowSurface;
+import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
+import com.robclouth.art_nanovg.nanovg.nanovg;
 
 /**
  * Shadow node for NVG virtual tree root - NVGSurfaceView
  */
-public class NVGSurfaceViewShadowNode extends LayoutShadowNode {
+public class NVGSurfaceViewShadowNode extends LayoutShadowNode
+        implements TextureView.SurfaceTextureListener {
+
+    private @Nullable WindowSurface windowSurface;
+
+    public NVGSurfaceViewShadowNode(){
+    }
+
+    public WindowSurface getWindowSurface(){
+        return windowSurface;
+    }
+
 
     @Override
-
     public boolean isVirtual() {
         return false;
     }
@@ -35,23 +58,66 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode {
     @Override
     public void onCollectExtraUpdates(UIViewOperationQueue uiUpdater) {
         super.onCollectExtraUpdates(uiUpdater);
-        uiUpdater.enqueueUpdateExtraData(getReactTag(), drawOutput());
+        queueRender();
+        uiUpdater.enqueueUpdateExtraData(getReactTag(), this);
     }
 
-    private Object drawOutput() {
-        // TODO(7255985): Use TextureView and pass Surface from the view to draw on it asynchronously
-        // instead of passing the bitmap (which is inefficient especially in terms of memory usage)
-        Bitmap bitmap = Bitmap.createBitmap(
-                (int) getLayoutWidth(),
-                (int) getLayoutHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint();
+    private void queueRender(){
+        if (windowSurface == null) {
+            markChildrenUpdatesSeen(this);
+            return;
+        }
+
+        getThemedContext().getNativeModule(NVGContext.class).queueRender(this);
+    }
+
+    public void drawOutput(SWIGTYPE_p_NVGcontext vg) {
+        GLES20.glClearColor(1, 0, 0, 1.0f);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_STENCIL_BUFFER_BIT);
+        GLES20.glEnable(GLES20.GL_BLEND);
+        GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
+        GLES20.glEnable(GLES20.GL_CULL_FACE);
+        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+
+        float pixelDensity = getThemedContext().getResources().getDisplayMetrics().density;
+
+        nanovg.nvgBeginFrame(vg, windowSurface.getWidth(), windowSurface.getHeight(), pixelDensity);
+
         for (int i = 0; i < getChildCount(); i++) {
             NVGVirtualNode child = (NVGVirtualNode) getChildAt(i);
-            child.draw(canvas, paint, 1f);
+            child.draw(vg, 1f);
             child.markUpdateSeen();
         }
-        return bitmap;
+
+        nanovg.nvgEndFrame(vg);
     }
+
+    private void markChildrenUpdatesSeen(ReactShadowNode shadowNode) {
+        for (int i = 0; i < shadowNode.getChildCount(); i++) {
+            ReactShadowNode child = shadowNode.getChildAt(i);
+            child.markUpdateSeen();
+            markChildrenUpdatesSeen(child);
+        }
+    }
+
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        windowSurface = new WindowSurface(getThemedContext().getNativeModule(NVGContext.class).getGLContext(), surface);
+        queueRender();
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        windowSurface.release();
+        windowSurface = null;
+        return true;
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+        
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
 }

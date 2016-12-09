@@ -22,6 +22,14 @@ import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.ReactConstants;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.robclouth.art_nanovg.nanovg.NVGcolor;
+import com.robclouth.art_nanovg.nanovg.NVGlineCap;
+import com.robclouth.art_nanovg.nanovg.NVGsolidity;
+import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
+import com.robclouth.art_nanovg.nanovg.nanovg;
+import com.robclouth.art_nanovg.nanovg.nanovgConstants;
+
+import static com.robclouth.art_nanovg.nanovg.NVGsolidity.NVG_HOLE;
 
 /**
  * Shadow node for virtual NVGShape view
@@ -31,6 +39,8 @@ public class NVGShapeShadowNode extends NVGVirtualNode {
     private static final int CAP_BUTT = 0;
     private static final int CAP_ROUND = 1;
     private static final int CAP_SQUARE = 2;
+    private static final int CAP_BEVEL = 3;
+    private static final int CAP_MITER = 4;
 
     private static final int JOIN_BEVEL = 2;
     private static final int JOIN_MITER = 0;
@@ -44,24 +54,27 @@ public class NVGShapeShadowNode extends NVGVirtualNode {
 
     protected
     @Nullable
-    Path mPath;
+    ReadableArray mShapePath;
+
     private
     @Nullable
     float[] mStrokeColor;
+
     private
     @Nullable
     float[] mFillColor;
+
     private
     @Nullable
     float[] mStrokeDash;
+
     private float mStrokeWidth = 1;
     private int mStrokeCap = CAP_ROUND;
     private int mStrokeJoin = JOIN_ROUND;
 
     @ReactProp(name = "d")
     public void setShapePath(@Nullable ReadableArray shapePath) {
-//        float[] pathData = PropHelper.toFloatArray(shapePath);
-//        mPath = createPath(pathData);
+        mShapePath = shapePath;
         markUpdated();
     }
 
@@ -102,158 +115,165 @@ public class NVGShapeShadowNode extends NVGVirtualNode {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint, float opacity) {
-//        opacity *= mOpacity;
-//        if (opacity > MIN_OPACITY_FOR_DRAW) {
-//            saveAndSetupCanvas(canvas);
-//            if (mPath == null) {
-//                throw new JSApplicationIllegalArgumentException(
-//                        "Shapes should have a valid path (d) prop");
-//            }
-//            if (setupFillPaint(paint, opacity)) {
-//                canvas.drawPath(mPath, paint);
-//            }
-//            if (setupStrokePaint(paint, opacity)) {
-//                canvas.drawPath(mPath, paint);
-//            }
-//            restoreCanvas(canvas);
-//        }
+    public void draw(SWIGTYPE_p_NVGcontext vg, float opacity) {
+        opacity *= mOpacity;
+        if (opacity > MIN_OPACITY_FOR_DRAW) {
+            saveAndSetupNVGContext(vg);
+
+            setupPath(vg);
+
+            drawFill(vg, opacity);
+            drawStroke(vg, opacity);
+
+            restoreNVGContext(vg);
+        }
         markUpdateSeen();
     }
 
-    /**
-     * Sets up {@link #mPaint} according to the props set on a shadow view. Returns {@code true}
-     * if the stroke should be drawn, {@code false} if not.
-     */
-    protected boolean setupStrokePaint(Paint paint, float opacity) {
+    private void setupPath(SWIGTYPE_p_NVGcontext vg){
+        nanovg.nvgBeginPath(vg);
+
+        int i = 0;
+        while (i < mShapePath.size()) {
+            int type = mShapePath.getInt(i++);
+            switch (type) {
+                case 0:
+                    nanovg.nvgMoveTo(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    break;
+                case 1:
+                    nanovg.nvgClosePath(vg);
+                    if(mShapePath.getBoolean(i++))
+                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                    break;
+                case 2:
+                    nanovg.nvgLineTo(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    break;
+                case 3:
+                    nanovg.nvgBezierTo(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    break;
+                case 4:
+                    nanovg.nvgArc(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            mShapePath.getInt(i++)
+                    );
+                    break;
+                case 5:
+                    nanovg.nvgCircle(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    if(mShapePath.getBoolean(i++))
+                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                    break;
+                case 6:
+                    nanovg.nvgEllipse(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    if(mShapePath.getBoolean(i++))
+                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                    break;
+                case 7:
+                    nanovg.nvgRect(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    if(mShapePath.getBoolean(i++))
+                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                    break;
+                case 8:
+                    nanovg.nvgRoundedRectVarying(vg,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale,
+                            (float)mShapePath.getDouble(i++) * mScale
+                    );
+                    if(mShapePath.getBoolean(i++))
+                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                    break;
+                case 9:
+                    nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                    break;
+            }
+        }
+    }
+
+    protected void drawStroke(SWIGTYPE_p_NVGcontext vg, float opacity) {
         if (mStrokeWidth == 0 || mStrokeColor == null || mStrokeColor.length == 0) {
-            return false;
+            return;
         }
-        paint.reset();
-        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        paint.setStyle(Paint.Style.STROKE);
-        switch (mStrokeCap) {
-            case CAP_BUTT:
-                paint.setStrokeCap(Paint.Cap.BUTT);
-                break;
-            case CAP_SQUARE:
-                paint.setStrokeCap(Paint.Cap.SQUARE);
-                break;
-            case CAP_ROUND:
-                paint.setStrokeCap(Paint.Cap.ROUND);
+
+        nanovg.nvgLineCap(vg, mStrokeCap);
+        nanovg.nvgLineJoin(vg, mStrokeJoin);
+        nanovg.nvgStrokeWidth(vg, mStrokeWidth * mScale);
+
+        int colorType = (int) mStrokeColor[0];
+        switch (colorType) {
+            case 0:
+                nanovg.nvgStrokeColor(vg, nanovg.nvgRGBAf(
+                        mStrokeColor[1],
+                        mStrokeColor[2],
+                        mStrokeColor[3],
+                        mStrokeColor.length > 4 ? mStrokeColor[4] * opacity : opacity
+                ));
                 break;
             default:
-                throw new JSApplicationIllegalArgumentException(
-                        "strokeCap " + mStrokeCap + " unrecognized");
+                // TODO(6352048): Support gradients etc.
+                FLog.w(ReactConstants.TAG, "NVG: Color type " + colorType + " not supported!");
         }
-        switch (mStrokeJoin) {
-            case JOIN_MITER:
-                paint.setStrokeJoin(Paint.Join.MITER);
-                break;
-            case JOIN_BEVEL:
-                paint.setStrokeJoin(Paint.Join.BEVEL);
-                break;
-            case JOIN_ROUND:
-                paint.setStrokeJoin(Paint.Join.ROUND);
-                break;
-            default:
-                throw new JSApplicationIllegalArgumentException(
-                        "strokeJoin " + mStrokeJoin + " unrecognized");
-        }
-        paint.setStrokeWidth(mStrokeWidth * mScale);
-        paint.setARGB(
-                (int) (mStrokeColor.length > 3 ? mStrokeColor[3] * opacity * 255 : opacity * 255),
-                (int) (mStrokeColor[0] * 255),
-                (int) (mStrokeColor[1] * 255),
-                (int) (mStrokeColor[2] * 255));
+
         if (mStrokeDash != null && mStrokeDash.length > 0) {
             // TODO(6352067): Support dashes
             FLog.w(ReactConstants.TAG, "NVG: Dashes are not supported yet!");
         }
-        return true;
+
+        nanovg.nvgStroke(vg);
     }
 
-    /**
-     * Sets up {@link #mPaint} according to the props set on a shadow view. Returns {@code true}
-     * if the fill should be drawn, {@code false} if not.
-     */
-    protected boolean setupFillPaint(Paint paint, float opacity) {
+    protected void drawFill(SWIGTYPE_p_NVGcontext vg, float opacity) {
         if (mFillColor != null && mFillColor.length > 0) {
-            paint.reset();
-            paint.setFlags(Paint.ANTI_ALIAS_FLAG);
-            paint.setStyle(Paint.Style.FILL);
             int colorType = (int) mFillColor[0];
             switch (colorType) {
                 case 0:
-                    paint.setARGB(
-                            (int) (mFillColor.length > 4 ? mFillColor[4] * opacity * 255 : opacity * 255),
-                            (int) (mFillColor[1] * 255),
-                            (int) (mFillColor[2] * 255),
-                            (int) (mFillColor[3] * 255));
+                    nanovg.nvgFillColor(vg, nanovg.nvgRGBAf(
+                            mFillColor[1],
+                            mFillColor[2],
+                            mFillColor[3],
+                            mFillColor.length > 4 ? mFillColor[4] * opacity : opacity
+                    ));
                     break;
                 default:
                     // TODO(6352048): Support gradients etc.
                     FLog.w(ReactConstants.TAG, "NVG: Color type " + colorType + " not supported!");
             }
-            return true;
-        }
-        return false;
-    }
 
-    /**
-     * Creates a {@link Path} from an array of instructions constructed by JS
-     * (see NVGSerializablePath.js). Each instruction starts with a type (see PATH_TYPE_*) followed
-     * by arguments for that instruction. For example, to create a line the instruction will be
-     * 2 (PATH_LINE_TO), x, y. This will draw a line from the last draw point (or 0,0) to x,y.
-     *
-     * @param data the array of instructions
-     * @return the {@link Path} that can be drawn to a canvas
-     */
-    private Path createPath(float[] data) {
-        Path path = new Path();
-        path.moveTo(0, 0);
-        int i = 0;
-        while (i < data.length) {
-            int type = (int) data[i++];
-            switch (type) {
-                case PATH_TYPE_MOVETO:
-                    path.moveTo(data[i++] * mScale, data[i++] * mScale);
-                    break;
-                case PATH_TYPE_CLOSE:
-                    path.close();
-                    break;
-                case PATH_TYPE_LINETO:
-                    path.lineTo(data[i++] * mScale, data[i++] * mScale);
-                    break;
-                case PATH_TYPE_CURVETO:
-                    path.cubicTo(
-                            data[i++] * mScale,
-                            data[i++] * mScale,
-                            data[i++] * mScale,
-                            data[i++] * mScale,
-                            data[i++] * mScale,
-                            data[i++] * mScale);
-                    break;
-                case PATH_TYPE_ARC: {
-                    float x = data[i++] * mScale;
-                    float y = data[i++] * mScale;
-                    float r = data[i++] * mScale;
-                    float start = (float) Math.toDegrees(data[i++]);
-                    float end = (float) Math.toDegrees(data[i++]);
-                    boolean clockwise = data[i++] == 0f;
-                    if (!clockwise) {
-                        end = 360 - end;
-                    }
-                    float sweep = start - end;
-                    RectF oval = new RectF(x - r, y - r, x + r, y + r);
-                    path.addArc(oval, start, sweep);
-                    break;
-                }
-                default:
-                    throw new JSApplicationIllegalArgumentException(
-                            "Unrecognized drawing instruction " + type);
-            }
+            nanovg.nvgFill(vg);
         }
-        return path;
     }
 }

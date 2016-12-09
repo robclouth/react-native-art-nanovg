@@ -18,6 +18,8 @@ import android.graphics.Region;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
+import com.robclouth.art_nanovg.nanovg.nanovg;
 
 /**
  * Shadow node for virtual NVGGroup view
@@ -42,27 +44,25 @@ public class NVGGroupShadowNode extends NVGVirtualNode {
         return true;
     }
 
-    public void draw(Canvas canvas, Paint paint, float opacity) {
+    public void draw(SWIGTYPE_p_NVGcontext vg, float opacity) {
         opacity *= mOpacity;
         if (opacity > MIN_OPACITY_FOR_DRAW) {
-            saveAndSetupCanvas(canvas);
+            saveAndSetupNVGContext(vg);
 
             if (mClipping != null) {
-                canvas.clipRect(
-                        mClipping.left * mScale,
+                nanovg.nvgScissor(vg, mClipping.left * mScale,
                         mClipping.top * mScale,
-                        mClipping.right * mScale,
-                        mClipping.bottom * mScale,
-                        Region.Op.REPLACE);
+                        mClipping.width() * mScale,
+                        mClipping.height() * mScale);
             }
 
             for (int i = 0; i < getChildCount(); i++) {
                 NVGVirtualNode child = (NVGVirtualNode) getChildAt(i);
-                child.draw(canvas, paint, opacity);
+                child.draw(vg, opacity);
                 child.markUpdateSeen();
             }
 
-            restoreCanvas(canvas);
+            restoreNVGContext(vg);
         }
     }
 
