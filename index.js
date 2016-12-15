@@ -6,10 +6,9 @@ import Transform from 'art/core/transform';
 
 import React from 'react';
 
-import ReactNativeViewAttributes from 'ReactNativeViewAttributes';
+import ReactNativeViewAttributes from 'react-native/Libraries/Components/View/ReactNativeViewAttributes';
+import createReactNativeComponentClass from 'react-native/Libraries/Renderer/src/renderers/native/createReactNativeComponentClass';
 
-
-import createReactNativeComponentClass from 'createReactNativeComponentClass';
 import merge from 'merge';
 
 // Diff Helpers
