@@ -72,15 +72,22 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
     }
 
     public void drawOutput(SWIGTYPE_p_NVGcontext vg) {
-        GLES20.glClearColor(1, 0, 0, 1.0f);
+        GLES20.glClearColor(0, 0, 0, 0.0f);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_STENCIL_BUFFER_BIT);
+
+        if(windowSurface.getWidth() < 0 || windowSurface.getHeight() < 0)
+            return;
+
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         GLES20.glEnable(GLES20.GL_CULL_FACE);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
 
+        GLES20.glViewport(0, 0, windowSurface.getWidth(), windowSurface.getHeight());
+
         float pixelDensity = getThemedContext().getResources().getDisplayMetrics().density;
 
+        nanovg.nvgReset(vg);
         nanovg.nvgBeginFrame(vg, windowSurface.getWidth(), windowSurface.getHeight(), pixelDensity);
 
         for (int i = 0; i < getChildCount(); i++) {
@@ -108,14 +115,25 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
 
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        windowSurface.release();
-        windowSurface = null;
-        return true;
+        if(windowSurface == null)
+            return true;
+
+        synchronized (windowSurface) {
+            windowSurface.release();
+            windowSurface = null;
+            return true;
+        }
     }
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        
+        synchronized (windowSurface) {
+            if(windowSurface != null)
+                windowSurface.release();
+
+            windowSurface = new WindowSurface(getThemedContext().getNativeModule(NVGContext.class).getGLContext(), surface);
+            queueRender();
+        }
     }
 
     @Override

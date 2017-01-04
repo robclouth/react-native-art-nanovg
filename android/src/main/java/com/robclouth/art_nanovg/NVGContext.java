@@ -69,14 +69,18 @@ public class NVGContext extends ReactContextBaseJavaModule {
             while (true) {
                 try {
                     NVGSurfaceViewShadowNode node = renderQueue.take();
-                    node.getWindowSurface().makeCurrent();
+                    WindowSurface surface = node.getWindowSurface();
 
-                    if(vg == null)
-                        vg = nanovg.nvgCreateGLES2(0);
+                    synchronized (surface) {
+                        surface.makeCurrent();
 
-                    node.drawOutput(vg);
+                        if (vg == null)
+                            vg = nanovg.nvgCreateGLES2(0);
 
-                    node.getWindowSurface().swapBuffers();
+                        node.drawOutput(vg);
+
+                        surface.swapBuffers();
+                    }
                 } catch (InterruptedException e) {
                     break;
                 }

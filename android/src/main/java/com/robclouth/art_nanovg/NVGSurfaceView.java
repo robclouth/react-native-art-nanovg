@@ -28,5 +28,6 @@ public class NVGSurfaceView extends TextureView {
 
     public NVGSurfaceView(ThemedReactContext context) {
         super(context);
+        setOpaque(false);
     }
 }
