@@ -109,29 +109,37 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        windowSurface = new WindowSurface(getThemedContext().getNativeModule(NVGContext.class).getGLContext(), surface);
-        queueRender();
+        NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
+
+        synchronized (nvgContext.getLock()) {
+            windowSurface = new WindowSurface(nvgContext.getGLContext(), surface);
+            queueRender();
+        }
     }
 
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        if(windowSurface == null)
-            return true;
+        NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
 
-        synchronized (windowSurface) {
-            windowSurface.release();
-            windowSurface = null;
+        synchronized (nvgContext.getLock()) {
+            if(windowSurface != null){
+                windowSurface.release();
+                windowSurface = null;
+            }
+
             return true;
         }
     }
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        synchronized (windowSurface) {
+        NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
+
+        synchronized (nvgContext.getLock()) {
             if(windowSurface != null)
                 windowSurface.release();
 
-            windowSurface = new WindowSurface(getThemedContext().getNativeModule(NVGContext.class).getGLContext(), surface);
+            windowSurface = new WindowSurface(nvgContext.getGLContext(), surface);
             queueRender();
         }
     }

@@ -11,10 +11,6 @@ package com.robclouth.art_nanovg;
 
 import javax.annotation.Nullable;
 
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.DisplayMetricsHolder;
@@ -31,7 +27,7 @@ public abstract class NVGVirtualNode extends ReactShadowNode {
 
     protected static final float MIN_OPACITY_FOR_DRAW = 0.01f;
 
-    private static final float[] sMatrixData = new float[9];
+    protected float[] mMatrixData = new float[6];
 
     protected float mOpacity = 1f;
 
@@ -51,12 +47,12 @@ public abstract class NVGVirtualNode extends ReactShadowNode {
     protected final void saveAndSetupNVGContext(SWIGTYPE_p_NVGcontext vg) {
         nanovg.nvgSave(vg);
         nanovg.nvgTransform(vg,
-                sMatrixData[0],
-                sMatrixData[1],
-                sMatrixData[2],
-                sMatrixData[3],
-                sMatrixData[4],
-                sMatrixData[5]);
+                mMatrixData[0],
+                mMatrixData[1],
+                mMatrixData[2],
+                mMatrixData[3],
+                mMatrixData[4] * mScale,
+                mMatrixData[5] * mScale);
     }
 
     protected void restoreNVGContext(SWIGTYPE_p_NVGcontext vg) {
@@ -72,7 +68,7 @@ public abstract class NVGVirtualNode extends ReactShadowNode {
     @ReactProp(name = "transform")
     public void setTransform(@Nullable ReadableArray transformArray) {
         if (transformArray != null) {
-            int matrixSize = PropHelper.toFloatArray(transformArray, sMatrixData);
+            int matrixSize = PropHelper.toFloatArray(transformArray, mMatrixData);
             if (matrixSize != 6 && matrixSize != -1) {
                 throw new JSApplicationIllegalArgumentException("Transform matrices must be of size 6");
             }

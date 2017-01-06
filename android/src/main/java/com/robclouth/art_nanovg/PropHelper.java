@@ -16,7 +16,7 @@ import com.facebook.react.bridge.ReadableArray;
 /**
  * Contains static helper methods for accessing props.
  */
-/* package */ class PropHelper {
+public class PropHelper {
 
   /**
    * Converts {@link ReadableArray} to an array of {@code float}. Returns newly created array.
@@ -24,7 +24,7 @@ import com.facebook.react.bridge.ReadableArray;
    * @return a {@code float[]} if converted successfully, or {@code null} if {@param value} was
    * {@code null}.
    */
-  /*package*/ static @Nullable float[] toFloatArray(@Nullable ReadableArray value) {
+  public static @Nullable float[] toFloatArray(@Nullable ReadableArray value) {
     if (value != null) {
       float[] result = new float[value.size()];
       toFloatArray(value, result);
@@ -43,7 +43,7 @@ import com.facebook.react.bridge.ReadableArray;
    * @param into output array
    * @return number of items copied from input to the output array
    */
-  /*package*/ static int toFloatArray(ReadableArray value, float[] into) {
+  public static int toFloatArray(ReadableArray value, float[] into) {
     int length = value.size() > into.length ? into.length : value.size();
     for (int i = 0; i < length; i++) {
       into[i] = (float) value.getDouble(i);

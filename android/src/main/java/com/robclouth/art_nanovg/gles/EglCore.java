@@ -158,7 +158,7 @@ public final class EglCore {
                 EGL14.EGL_BLUE_SIZE, 8,
                 EGL14.EGL_ALPHA_SIZE, 8,
                 //EGL14.EGL_DEPTH_SIZE, 16,
-                //EGL14.EGL_STENCIL_SIZE, 8,
+                EGL14.EGL_STENCIL_SIZE, 8,
                 EGL14.EGL_RENDERABLE_TYPE, renderableType,
                 EGL14.EGL_NONE, 0,      // placeholder for recordable [@-3]
                 EGL14.EGL_NONE

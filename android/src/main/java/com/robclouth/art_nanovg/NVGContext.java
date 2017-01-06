@@ -9,6 +9,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.robclouth.art_nanovg.gles.EglCore;
 import com.robclouth.art_nanovg.gles.WindowSurface;
+import com.robclouth.art_nanovg.nanovg.NVGcreateFlags;
 import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
 import com.robclouth.art_nanovg.nanovg.nanovg;
 import com.robclouth.art_nanovg.nanovg.nanovgConstants;
@@ -34,6 +35,10 @@ public class NVGContext extends ReactContextBaseJavaModule {
         renderer.start();
     }
 
+    public Object getLock(){
+        return renderer.getLock();
+    }
+
     @Override
     public String getName() {
         return "NVGContext";
@@ -48,6 +53,7 @@ public class NVGContext extends ReactContextBaseJavaModule {
     }
 
     private static class Renderer extends Thread {
+        private Object mLock = new Object();
         private EglCore mEglCore;
         private SWIGTYPE_p_NVGcontext vg;
         private ArrayBlockingQueue<NVGSurfaceViewShadowNode> renderQueue = new ArrayBlockingQueue<>(100);
@@ -75,7 +81,7 @@ public class NVGContext extends ReactContextBaseJavaModule {
                         surface.makeCurrent();
 
                         if (vg == null)
-                            vg = nanovg.nvgCreateGLES2(0);
+                            vg = nanovg.nvgCreateGLES2(NVGcreateFlags.NVG_ANTIALIAS.swigValue());
 
                         node.drawOutput(vg);
 
@@ -88,6 +94,10 @@ public class NVGContext extends ReactContextBaseJavaModule {
 
             mEglCore.release();
             Log.d(TAG, "Renderer thread exiting");
+        }
+
+        public Object getLock(){
+            return mLock;
         }
     }
 }
