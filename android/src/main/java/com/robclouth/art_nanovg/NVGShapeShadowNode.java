@@ -6,32 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-
 package com.robclouth.art_nanovg;
 
-import javax.annotation.Nullable;
-
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.RectF;
-
 import com.facebook.common.logging.FLog;
-import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.ReactConstants;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.robclouth.art_nanovg.brushes.NVGBrush;
-import com.robclouth.art_nanovg.brushes.NVGLinearGradient;
-import com.robclouth.art_nanovg.brushes.NVGSolidColour;
-import com.robclouth.art_nanovg.nanovg.NVGcolor;
-import com.robclouth.art_nanovg.nanovg.NVGlineCap;
-import com.robclouth.art_nanovg.nanovg.NVGpaint;
-import com.robclouth.art_nanovg.nanovg.NVGsolidity;
 import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
 import com.robclouth.art_nanovg.nanovg.nanovg;
-import com.robclouth.art_nanovg.nanovg.nanovgConstants;
+
+import javax.annotation.Nullable;
 
 import static com.robclouth.art_nanovg.nanovg.NVGsolidity.NVG_HOLE;
 
@@ -139,91 +124,95 @@ public class NVGShapeShadowNode extends NVGVirtualNode {
 
         int i = 0;
         while (i < mShapePath.size()) {
-            int type = mShapePath.getInt(i++);
-            switch (type) {
-                case 0:
-                    nanovg.nvgMoveTo(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    break;
-                case 1:
-                    nanovg.nvgClosePath(vg);
-                    if(mShapePath.getBoolean(i++))
+            try {
+                int type = mShapePath.getInt(i++);
+                switch (type) {
+                    case 0:
+                        nanovg.nvgMoveTo(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        break;
+                    case 1:
+                        nanovg.nvgClosePath(vg);
+                        if (mShapePath.getBoolean(i++))
+                            nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                        break;
+                    case 2:
+                        nanovg.nvgLineTo(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        break;
+                    case 3:
+                        nanovg.nvgBezierTo(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        break;
+                    case 4:
+                        nanovg.nvgArc(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++),
+                                (float) mShapePath.getDouble(i++),
+                                mShapePath.getInt(i++)
+                        );
+                        break;
+                    case 5:
+                        nanovg.nvgCircle(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        if (mShapePath.getBoolean(i++))
+                            nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                        break;
+                    case 6:
+                        nanovg.nvgEllipse(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        if (mShapePath.getBoolean(i++))
+                            nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                        break;
+                    case 7:
+                        nanovg.nvgRect(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        if (mShapePath.getBoolean(i++))
+                            nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                        break;
+                    case 8:
+                        nanovg.nvgRoundedRectVarying(vg,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale,
+                                (float) mShapePath.getDouble(i++) * mScale
+                        );
+                        if (mShapePath.getBoolean(i++))
+                            nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
+                        break;
+                    case 9:
                         nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
-                    break;
-                case 2:
-                    nanovg.nvgLineTo(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    break;
-                case 3:
-                    nanovg.nvgBezierTo(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    break;
-                case 4:
-                    nanovg.nvgArc(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++),
-                            (float)mShapePath.getDouble(i++),
-                            mShapePath.getInt(i++)
-                    );
-                    break;
-                case 5:
-                    nanovg.nvgCircle(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    if(mShapePath.getBoolean(i++))
-                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
-                    break;
-                case 6:
-                    nanovg.nvgEllipse(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    if(mShapePath.getBoolean(i++))
-                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
-                    break;
-                case 7:
-                    nanovg.nvgRect(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    if(mShapePath.getBoolean(i++))
-                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
-                    break;
-                case 8:
-                    nanovg.nvgRoundedRectVarying(vg,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale,
-                            (float)mShapePath.getDouble(i++) * mScale
-                    );
-                    if(mShapePath.getBoolean(i++))
-                        nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
-                    break;
-                case 9:
-                    nanovg.nvgPathWinding(vg, NVG_HOLE.swigValue());
-                    break;
+                        break;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
     }

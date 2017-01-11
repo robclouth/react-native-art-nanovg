@@ -1,9 +1,6 @@
 package com.robclouth.art_nanovg;
 
-import android.graphics.SurfaceTexture;
-import android.opengl.GLES20;
 import android.util.Log;
-import android.view.TextureView;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -12,7 +9,6 @@ import com.robclouth.art_nanovg.gles.WindowSurface;
 import com.robclouth.art_nanovg.nanovg.NVGcreateFlags;
 import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
 import com.robclouth.art_nanovg.nanovg.nanovg;
-import com.robclouth.art_nanovg.nanovg.nanovgConstants;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -75,16 +71,15 @@ public class NVGContext extends ReactContextBaseJavaModule {
             while (true) {
                 try {
                     NVGSurfaceViewShadowNode node = renderQueue.take();
-                    WindowSurface surface = node.getWindowSurface();
 
-                    synchronized (surface) {
+                    synchronized (mLock) {
+                        WindowSurface surface = node.getWindowSurface();
                         surface.makeCurrent();
 
                         if (vg == null)
                             vg = nanovg.nvgCreateGLES2(NVGcreateFlags.NVG_ANTIALIAS.swigValue());
 
                         node.drawOutput(vg);
-
                         surface.swapBuffers();
                     }
                 } catch (InterruptedException e) {

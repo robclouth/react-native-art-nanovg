@@ -24,10 +24,16 @@ public class NVGLinearGradient extends NVGPaint {
         }
         float scale = nanovg.nvgDevicePixelRatio(vg);
 
-        return nanovg.nvgLinearGradient(vg,
-                (float)mArray.getDouble(1) * scale, (float)mArray.getDouble(2) * scale,
-                (float)mArray.getDouble(3) * scale, (float)mArray.getDouble(4) * scale,
-                nanovg.nvgRGBAf((float)mArray.getDouble(5), (float)mArray.getDouble(6), (float)mArray.getDouble(7), (float)mArray.getDouble(8)),
-                nanovg.nvgRGBAf((float)mArray.getDouble(9), (float)mArray.getDouble(10), (float)mArray.getDouble(11), (float)mArray.getDouble(12)));
+        try {
+            return nanovg.nvgLinearGradient(vg,
+                    (float) mArray.getDouble(1) * scale, (float) mArray.getDouble(2) * scale,
+                    (float) mArray.getDouble(3) * scale, (float) mArray.getDouble(4) * scale,
+                    nanovg.nvgRGBAf((float) mArray.getDouble(5), (float) mArray.getDouble(6), (float) mArray.getDouble(7), (float) mArray.getDouble(8)),
+                    nanovg.nvgRGBAf((float) mArray.getDouble(9), (float) mArray.getDouble(10), (float) mArray.getDouble(11), (float) mArray.getDouble(12)));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
