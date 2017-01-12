@@ -9,25 +9,18 @@
 
 package com.robclouth.art_nanovg;
 
-import javax.annotation.Nullable;
-
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Color;
-import android.opengl.GLES20;
-import android.view.Surface;
-import android.graphics.PorterDuff;
 import android.graphics.SurfaceTexture;
+import android.opengl.GLES20;
 import android.view.TextureView;
 
-import com.facebook.common.logging.FLog;
-import com.facebook.react.common.ReactConstants;
 import com.facebook.react.uimanager.LayoutShadowNode;
-import com.facebook.react.uimanager.UIViewOperationQueue;
 import com.facebook.react.uimanager.ReactShadowNode;
+import com.facebook.react.uimanager.UIViewOperationQueue;
 import com.robclouth.art_nanovg.gles.WindowSurface;
 import com.robclouth.art_nanovg.nanovg.SWIGTYPE_p_NVGcontext;
 import com.robclouth.art_nanovg.nanovg.nanovg;
+
+import javax.annotation.Nullable;
 
 /**
  * Shadow node for NVG virtual tree root - NVGSurfaceView
@@ -126,7 +119,7 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
                 windowSurface.release();
                 windowSurface = null;
             }
-
+            
             return true;
         }
     }
@@ -136,10 +129,6 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
         NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
 
         synchronized (nvgContext.getLock()) {
-            if(windowSurface != null)
-                windowSurface.release();
-
-            windowSurface = new WindowSurface(nvgContext.getGLContext(), surface);
             queueRender();
         }
     }
