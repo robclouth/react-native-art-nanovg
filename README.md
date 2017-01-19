@@ -4,7 +4,6 @@
 
 
 ### TODO:
-1. Fix radial gradients.
-2. Android version.
-3. Respect the border radius of the Surface.
+1. Add radial gradients.
+2. Respect the border radius of the Surface.
 
