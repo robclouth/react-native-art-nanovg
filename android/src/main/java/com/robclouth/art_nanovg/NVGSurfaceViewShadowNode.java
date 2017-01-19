@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  * All rights reserved.
- *
+ * <p>
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
@@ -28,12 +28,17 @@ import javax.annotation.Nullable;
 public class NVGSurfaceViewShadowNode extends LayoutShadowNode
         implements TextureView.SurfaceTextureListener {
 
-    private @Nullable WindowSurface windowSurface;
+    private
+    @Nullable
+    WindowSurface windowSurface;
 
-    public NVGSurfaceViewShadowNode(){
+    private int currWidth, currHeight;
+
+
+    public NVGSurfaceViewShadowNode() {
     }
 
-    public WindowSurface getWindowSurface(){
+    public WindowSurface getWindowSurface() {
         return windowSurface;
     }
 
@@ -51,11 +56,11 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
     @Override
     public void onCollectExtraUpdates(UIViewOperationQueue uiUpdater) {
         super.onCollectExtraUpdates(uiUpdater);
-        queueRender();
         uiUpdater.enqueueUpdateExtraData(getReactTag(), this);
+        queueRender();
     }
 
-    private void queueRender(){
+    private void queueRender() {
         if (windowSurface == null) {
             markChildrenUpdatesSeen(this);
             return;
@@ -68,20 +73,17 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
         GLES20.glClearColor(0, 0, 0, 0.0f);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_STENCIL_BUFFER_BIT);
 
-        if(windowSurface.getWidth() < 0 || windowSurface.getHeight() < 0)
-            return;
-
         GLES20.glEnable(GLES20.GL_BLEND);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         GLES20.glEnable(GLES20.GL_CULL_FACE);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
 
-        GLES20.glViewport(0, 0, windowSurface.getWidth(), windowSurface.getHeight());
+        GLES20.glViewport(0, 0, currWidth, currHeight);
 
         float pixelDensity = getThemedContext().getResources().getDisplayMetrics().density;
 
         nanovg.nvgReset(vg);
-        nanovg.nvgBeginFrame(vg, windowSurface.getWidth(), windowSurface.getHeight(), pixelDensity);
+        nanovg.nvgBeginFrame(vg, currWidth, currHeight, pixelDensity);
 
         for (int i = 0; i < getChildCount(); i++) {
             NVGVirtualNode child = (NVGVirtualNode) getChildAt(i);
@@ -104,6 +106,9 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
         NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
 
+        currWidth = width;
+        currHeight = height;
+
         synchronized (nvgContext.getLock()) {
             windowSurface = new WindowSurface(nvgContext.getGLContext(), surface);
             queueRender();
@@ -115,11 +120,11 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
         NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
 
         synchronized (nvgContext.getLock()) {
-            if(windowSurface != null){
+            if (windowSurface != null) {
                 windowSurface.release();
                 windowSurface = null;
             }
-            
+
             return true;
         }
     }
@@ -128,11 +133,31 @@ public class NVGSurfaceViewShadowNode extends LayoutShadowNode
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
         NVGContext nvgContext = getThemedContext().getNativeModule(NVGContext.class);
 
+        currWidth = width;
+        currHeight = height;
+
+
+        synchronized (nvgContext.getLock()) {
+            queueRender();
+        }
+
+        /*
+        Wait for while to give the WindowSurface time to resize, then re-render.
+        It's a bit hacky but seems to work, and I don't imagine resizes happening too often.
+        */
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // do nothing
+        }
+
         synchronized (nvgContext.getLock()) {
             queueRender();
         }
     }
 
     @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+    }
 }

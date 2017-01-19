@@ -85,7 +85,7 @@
   "peerDependencies": {
     "react-native": ">=0.39.0"
   },
-  "readme": "## react-native-art-nanovg\n\n`react-native-art-nanovg` is a replacement for ReactNativeART that uses the OpenGL vector drawing library NanoVG as a back-end, and replaces some of the weirder ART programming choices (like that horrible way of drawing arcs).\n\n\n### TODO:\n1. Fix radial gradients.\n2. Android version.\n3. Respect the border radius of the Surface.\n\n",
+  "readme": "## react-native-art-nanovg\n\n`react-native-art-nanovg` is a replacement for ReactNativeART that uses the OpenGL vector drawing library NanoVG as a back-end, and replaces some of the weirder ART programming choices (like that horrible way of drawing arcs).\n\n\n### TODO:\n1. Implement radial gradients.\n2. Respect the border radius of the Surface.\nOther features of NanoVG.\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
@@ -94,5 +94,5 @@
   "scripts": {
     "lint": "eslint ./"
   },
-  "version": "0.0.1"
+  "version": "1.0.1"
 }
