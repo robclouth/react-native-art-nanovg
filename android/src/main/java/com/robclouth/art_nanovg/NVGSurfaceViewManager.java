@@ -8,9 +8,9 @@
 
 package com.robclouth.art_nanovg;
 
-import com.facebook.csslayout.CSSMeasureMode;
-import com.facebook.csslayout.CSSNodeAPI;
-import com.facebook.csslayout.MeasureOutput;
+import com.facebook.yoga.YogaMeasureMode;
+import com.facebook.yoga.YogaMeasureFunction;
+import com.facebook.yoga.YogaNodeAPI;
 import com.facebook.react.uimanager.BaseViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
@@ -23,9 +23,14 @@ public class NVGSurfaceViewManager extends
 
     private static final String REACT_CLASS = "NVGSurfaceView";
 
-    private static final CSSNodeAPI.MeasureFunction MEASURE_FUNCTION = new CSSNodeAPI.MeasureFunction() {
+    private static final YogaMeasureFunction MEASURE_FUNCTION = new YogaMeasureFunction() {
         @Override
-        public long measure(CSSNodeAPI node, float width, CSSMeasureMode widthMode, float height, CSSMeasureMode heightMode) {
+        public long measure(
+                YogaNodeAPI node,
+                float width,
+                YogaMeasureMode widthMode,
+                float height,
+                YogaMeasureMode heightMode) {
             throw new IllegalStateException("SurfaceView should have explicit width and height set");
         }
     };

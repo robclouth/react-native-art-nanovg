@@ -2,7 +2,7 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-#import "RCTBridge.h"
+#import <React/RCTBridge.h>
 #import "nanovg.h"
 
 @interface NVGContext : NSObject <RCTBridgeModule>

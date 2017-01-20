@@ -8,7 +8,7 @@
  */
 
 #import <GLKit/GLKit.h>
-#import "RCTBridge.h"
+#import <React/RCTBridge.h>
 
 #import "NVGContainer.h"
 

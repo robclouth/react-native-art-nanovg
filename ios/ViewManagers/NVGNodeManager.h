@@ -8,7 +8,7 @@
  */
 
 #import "NVGNode.h"
-#import "RCTViewManager.h"
+#import <React/RCTViewManager.h>
 
 @interface NVGNodeManager : RCTViewManager
 

@@ -1,7 +1,7 @@
 
 #import "NVGContext.h"
-#import "RCTConvert.h"
-#import "RCTLog.h"
+#import <React/RCTConvert.h>
+#import <React/RCTLog.h>
 
 #define NANOVG_GLES2_IMPLEMENTATION
 #import "nanovg_gl.h"

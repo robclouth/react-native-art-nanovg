@@ -13,8 +13,8 @@
 #import "NVGPattern.h"
 #import "NVGRadialGradient.h"
 #import "NVGSolidColor.h"
-#import "RCTLog.h"
-#import "RCTFont.h"
+#import <React/RCTLog.h>
+#import <React/RCTFont.h>
 
 @implementation RCTConvert (NVG)
 

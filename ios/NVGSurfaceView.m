@@ -11,7 +11,7 @@
 #import "NVGContext.h"
 
 #import "NVGNode.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation NVGSurfaceView
 {

@@ -10,7 +10,7 @@
 #import "NVGRadialGradient.h"
 
 #import "RCTConvert+NVG.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation NVGRadialGradient
 {

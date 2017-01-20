@@ -12,7 +12,7 @@
 #import "NVGBrush.h"
 #import "NVGCGFloatArray.h"
 #import "NVGTextFrame.h"
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
 
 @interface RCTConvert (NVG)
 

@@ -10,7 +10,7 @@
 #import "NVGPattern.h"
 
 #import "RCTConvert+NVG.h"
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation NVGPattern
 {
