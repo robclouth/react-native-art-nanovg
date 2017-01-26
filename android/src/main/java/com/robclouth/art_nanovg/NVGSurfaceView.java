@@ -9,7 +9,9 @@
 package com.robclouth.art_nanovg;
 
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.Drawable;
 import android.opengl.GLES20;
+import android.os.Build;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
@@ -29,5 +31,12 @@ public class NVGSurfaceView extends TextureView {
     public NVGSurfaceView(ThemedReactContext context) {
         super(context);
         setOpaque(false);
+    }
+
+    @Override
+    public void setBackgroundDrawable(Drawable background) {
+        if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            super.setBackgroundDrawable(background);
+        }
     }
 }
